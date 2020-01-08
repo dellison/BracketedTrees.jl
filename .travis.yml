@@ -11,10 +11,6 @@ notifications:
 git:
   depth: 99999999
 
-matrix:
-  allow_failures:
-    - julia: nightly
-
 after_success:
   # code coverage report
   - julia -e 'using Pkg;
@@ -23,6 +19,8 @@ after_success:
               using Coverage; Codecov.submit(Codecov.process_folder())'
 
 jobs:
+  allow_failures:
+    - julia: nightly
   include:
     # build and deploy the documentation
     - stage: "Documentation"
